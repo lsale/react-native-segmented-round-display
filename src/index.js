@@ -11,14 +11,14 @@ const SegmentedRoundDisplay = ({
   emptyArcWidth,
   arcSpacing,
   totalArcSize,
-  emptyArcColor,
-  filledArcColor,
+  emptyArcColors,
+  filledArcColors,
   radius,
   style,
   animationDuration,
   animated,
   formatValue,
-  incompleteArcColor,
+  incompleteArcColors,
   displayValue,
   valueBoxColor,
   valueFontColor,
@@ -137,7 +137,7 @@ const SegmentedRoundDisplay = ({
         <G key={index.toString()}>
           <Path
             fill="none"
-            stroke={emptyArcColor}
+            stroke={emptyArcColors[0]}
             strokeWidth={emptyArcWidth}
             strokeLinecap="round"
             d={drawArc(arc.centerX, arc.centerY, radius, arc.start, arc.end)}
@@ -157,8 +157,8 @@ const SegmentedRoundDisplay = ({
                   fill="none"
                   stroke={
                     arc.isComplete
-                      ? filledArcColor
-                      : incompleteArcColor || filledArcColor
+                      ? filledArcColors[index] || filledArcColors[0]
+                      : incompleteArcColors[index] || incompleteArcColors[0]
                   }
                   strokeWidth={props.y}
                   strokeLinecap="round"
@@ -179,8 +179,8 @@ const SegmentedRoundDisplay = ({
               fill="none"
               stroke={
                 arc.isComplete
-                  ? filledArcColor
-                  : incompleteArcColor || filledArcColor
+                  ? filledArcColors[index] || filledArcColors[0]
+                  : incompleteArcColors[index] || incompleteArcColors[0]
               }
               strokeWidth={filledArcWidth}
               strokeLinecap="round"
@@ -227,8 +227,8 @@ SegmentedRoundDisplay.propTypes = {
   arcSpacing: PropTypes.number,
   totalArcSize: PropTypes.number,
   radius: PropTypes.number,
-  emptyArcColor: PropTypes.string,
-  filledArcColor: PropTypes.string,
+  emptyArcColors: PropTypes.array,
+  filledArcColors: PropTypes.array,
   formatAmount: PropTypes.func,
   style: PropTypes.object,
   animationDuration: PropTypes.number,
@@ -247,11 +247,11 @@ SegmentedRoundDisplay.defaultProps = {
   arcSpacing: 7,
   totalArcSize: 280,
   radius: 100,
-  emptyArcColor: "#ADB1CC",
-  filledArcColor: "#5ECCAA",
+  emptyArcColors: ["#ADB1CC"],
+  filledArcColors: ["#5ECCAA"],
   animationDuration: 1000,
   animated: true,
-  incompleteArcColor: "#23318C",
+  incompleteArcColors: ["#23318C"],
   displayValue: false,
   valueBoxColor: "#23318C",
   valueFontColor: "#FFFFFF",

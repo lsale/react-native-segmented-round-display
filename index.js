@@ -63,14 +63,14 @@ var SegmentedRoundDisplay = function SegmentedRoundDisplay(_ref) {
       emptyArcWidth = _ref.emptyArcWidth,
       arcSpacing = _ref.arcSpacing,
       totalArcSize = _ref.totalArcSize,
-      emptyArcColor = _ref.emptyArcColor,
-      filledArcColor = _ref.filledArcColor,
+      emptyArcColors = _ref.emptyArcColors,
+      filledArcColors = _ref.filledArcColors,
       radius = _ref.radius,
       style = _ref.style,
       animationDuration = _ref.animationDuration,
       animated = _ref.animated,
       formatValue = _ref.formatValue,
-      incompleteArcColor = _ref.incompleteArcColor,
+      incompleteArcColors = _ref.incompleteArcColors,
       displayValue = _ref.displayValue,
       valueBoxColor = _ref.valueBoxColor,
       valueFontColor = _ref.valueFontColor;
@@ -165,7 +165,7 @@ var SegmentedRoundDisplay = function SegmentedRoundDisplay(_ref) {
       key: index.toString()
     }, /*#__PURE__*/_react["default"].createElement(_reactNativeSvg.Path, {
       fill: "none",
-      stroke: emptyArcColor,
+      stroke: emptyArcColors[index] || emptyArcColors[0],
       strokeWidth: emptyArcWidth,
       strokeLinecap: "round",
       d: drawArc(arc.centerX, arc.centerY, radius, arc.start, arc.end)
@@ -185,14 +185,14 @@ var SegmentedRoundDisplay = function SegmentedRoundDisplay(_ref) {
     }, function (props) {
       return /*#__PURE__*/_react["default"].createElement(_reactNativeSvg.Path, {
         fill: "none",
-        stroke: arc.isComplete ? filledArcColor : incompleteArcColor || filledArcColor,
+        stroke: arc.isComplete ? filledArcColors[index] || filledArcColors[0] : incompleteArcColors[index] || incompleteArcColors[0],
         strokeWidth: props.y,
         strokeLinecap: "round",
         d: drawArc(arc.centerX, arc.centerY, radius, arc.start, props.x)
       });
     }), !animated && arc.filled > arc.start && /*#__PURE__*/_react["default"].createElement(_reactNativeSvg.Path, {
       fill: "none",
-      stroke: arc.isComplete ? filledArcColor : incompleteArcColor || filledArcColor,
+      stroke: arc.isComplete ? filledArcColors[index] || filledArcColors[0] : incompleteArcColors[index] || incompleteArcColors[0],
       strokeWidth: filledArcWidth,
       strokeLinecap: "round",
       d: drawArc(arc.centerX, arc.centerY, radius, arc.start, arc.filled)
@@ -224,14 +224,14 @@ SegmentedRoundDisplay.propTypes = {
   arcSpacing: _propTypes["default"].number,
   totalArcSize: _propTypes["default"].number,
   radius: _propTypes["default"].number,
-  emptyArcColor: _propTypes["default"].string,
-  filledArcColor: _propTypes["default"].string,
+  emptyArcColors: _propTypes["default"].array,
+  filledArcColors: _propTypes["default"].array,
   formatAmount: _propTypes["default"].func,
   style: _propTypes["default"].object,
   animationDuration: _propTypes["default"].number,
   animated: _propTypes["default"].bool,
   formatValue: _propTypes["default"].func,
-  incompleteArcColor: _propTypes["default"].string,
+  incompleteArcColors: _propTypes["default"].array,
   displayValue: _propTypes["default"].bool,
   valueBoxColor: _propTypes["default"].string,
   valueFontColor: _propTypes["default"].string
@@ -243,11 +243,11 @@ SegmentedRoundDisplay.defaultProps = {
   arcSpacing: 7,
   totalArcSize: 280,
   radius: 100,
-  emptyArcColor: "#ADB1CC",
-  filledArcColor: "#5ECCAA",
+  emptyArcColors: ["#ADB1CC"],
+  filledArcColors: ["#5ECCAA"],
   animationDuration: 1000,
   animated: true,
-  incompleteArcColor: "#23318C",
+  incompleteArcColors: ["#23318C"],
   displayValue: false,
   valueBoxColor: "#23318C",
   valueFontColor: "#FFFFFF"
